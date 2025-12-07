@@ -1,0 +1,266 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Letter for Raina</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        position: relative;
+    }
+
+    /* Falling petals container */
+    .petal {
+        position: fixed;
+        top: -20px;
+        width: 18px;
+        height: 18px;
+        background: #ff76b8;
+        opacity: 0.8;
+        border-radius: 60% 40% 60% 40%;
+        animation: fall 4s linear infinite;
+        pointer-events: none;
+        transform: rotate(20deg);
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(120vh) rotate(180deg); opacity: 0; }
+    }
+
+    /* Envelope */
+    .envelope {
+        width: 300px;
+        height: 200px;
+        background: #ffffff;
+        position: relative;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        cursor: pointer;
+        transition: 0.6s ease;
+    }
+
+    /* Flap */
+    .flap {
+        width: 0;
+        height: 0;
+        border-left: 150px solid transparent;
+        border-right: 150px solid transparent;
+        border-bottom: 120px solid #ffd6d6;
+        position: absolute;
+        top: -120px;
+        left: 0;
+        transform-origin: bottom;
+        transition: transform 1s ease;
+    }
+
+    /* Letter */
+    .letter {
+        width: 260px;
+        height: 160px;
+        background: white;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: 1s ease;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    /* Ribbon */
+    .ribbon {
+        position: absolute;
+        width: 100%;
+        height: 20px;
+        background: #ff6699;
+        top: 90px;
+        left: 0;
+        transition: 0.8s ease;
+    }
+
+    .bow {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background: #ff3366;
+        top: 75px;
+        left: 130px;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        transition: 0.6s ease;
+    }
+
+    .opened-ribbon .ribbon {
+        height: 4px;
+        background: #ff99bb;
+    }
+
+    .opened-ribbon .bow {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    .open-envelope .flap {
+        transform: rotateX(180deg);
+    }
+
+    .open-envelope .letter {
+        opacity: 1;
+        transform: translateY(-50px);
+    }
+
+    /* 🌷 Tulip */
+    .tulip {
+        position: absolute;
+        bottom: -120px;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+        width: 60px;
+        height: 120px;
+        transition: 1s ease;
+        opacity: 0;
+    }
+
+    .open-envelope .tulip {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+
+    .tulip .stem {
+        width: 6px;
+        height: 70px;
+        background: #4CAF50;
+        margin: 0 auto;
+        border-radius: 3px;
+    }
+
+    .tulip .leaf-left,
+    .tulip .leaf-right {
+        width: 30px;
+        height: 20px;
+        background: #4CAF50;
+        position: absolute;
+        bottom: 40px;
+        border-radius: 20px;
+    }
+
+    .leaf-left { left: 10px; transform: rotate(-30deg); }
+    .leaf-right { right: 10px; transform: rotate(30deg); }
+
+    .tulip .flower {
+        width: 40px;
+        height: 40px;
+        background: #ff4da6;
+        margin: 0 auto;
+        border-radius: 50% 50% 0 0;
+        position: relative;
+        top: -10px;
+    }
+
+    .tulip .flower:before,
+    .tulip .flower:after {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background: #ff4da6;
+        border-radius: 50% 50% 0 0;
+    }
+
+    .tulip .flower:before { left: -20px; }
+    .tulip .flower:after { right: -20px; }
+
+    #snapBtn {
+        padding: 10px 18px;
+        font-size: 16px;
+        background: #fffc00;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="envelope" id="envelope">
+    <div class="flap"></div>
+    <div class="ribbon"></div>
+    <div class="bow"></div>
+
+    <!-- 🌷 Tulip -->
+    <div class="tulip">
+        <div class="stem"></div>
+        <div class="leaf-left"></div>
+        <div class="leaf-right"></div>
+        <div class="flower"></div>
+    </div>
+
+    <div class="letter">
+        <h3>Dear Raina,</h3>
+        <p style="font-size:13px;">
+             every time I look into your eyes, it feels like I'm seeing a whole universe made of stars.
+            They shine so deeply and beautifully that my eyes forget how to blink. It's like they burn with a 
+            brightness so strong that my vision almost falls apart--so magical that my eyes feel like they could bleed 
+            every time I try to understand their beauty. <br><br>
+            And your smile… the moment it appears, everything around me stops. It melts my heart instantly--like the world softens,
+            the noise disappears, and only you remain. Your smile is not just a curve on your lips, it's a light that breaks every darkness inside me. to the Princess of this workd 💗
+        </p>
+        <button id="snapBtn" onclick="shareSnapchat()">Share</button>
+    </div>
+</div>
+
+<script>
+let ribbonOpened = false;
+let envelopeOpened = false;
+
+function createPetal() {
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (3 + Math.random() * 2) + "s";
+    document.body.appendChild(petal);
+
+    setTimeout(() => petal.remove(), 5005);
+}
+
+document.getElementById("envelope").addEventListener("click", function () {
+    const envelope = document.getElementById("envelope");
+
+    if (!ribbonOpened) {
+        envelope.classList.add("opened-ribbon");
+        ribbonOpened = true;
+        return;
+    }
+
+    if (!envelopeOpened) {
+        envelope.classList.add("open-envelope");
+        envelopeOpened = true;
+
+        setInterval(createPetal, 300);
+    }
+});
+
+function shareSnapchat() {
+    const text = encodeURIComponent("Check this beautiful letter I made for Raina ❤️");
+    const url = encodeURIComponent(window.location.href);
+    window.location.href = `snapchat://creativeKit/share?text=${text}&url=${url}`;
+}
+</script>
+
+</body>
+</html> 
